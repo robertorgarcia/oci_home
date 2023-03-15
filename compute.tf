@@ -9,13 +9,12 @@ resource "oci_core_instance" "ubuntu_instance" {
   # Optional
   display_name = "node${count.index}"
   create_vnic_details {
-    assign_public_ip = true
-    subnet_id        = oci_core_subnet.vcn-public-subnet.id
+    subnet_id = oci_core_subnet.vcn-public-subnet.id
   }
   agent_config {
-    is_management_disabled = "false"
-    is_monitoring_disabled = "false"
-    plugins_config {
+    is_management_disabled = "true"
+    is_monitoring_disabled = "true"
+    /* plugins_config {
       desired_state = "ENABLED"
       name          = "Management Agent"
     }
@@ -30,7 +29,7 @@ resource "oci_core_instance" "ubuntu_instance" {
     plugins_config {
       desired_state = "ENABLED"
       name          = "Bastion"
-    }
+    } */
   }
   source_details {
     source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaauqipuwandlr33vnvdgyadhawcmm53ydrrugkof5h4z7erscfj5tq"
@@ -38,6 +37,7 @@ resource "oci_core_instance" "ubuntu_instance" {
   }
   metadata = {
     "ssh_authorized_keys" : file("/home/urbino/.oci/id_rsa.pub")
+    "user_data" : filebase64("/home/urbino/oci_home/ansible_setup.sh")
   }
   preserve_boot_volume = false
 }

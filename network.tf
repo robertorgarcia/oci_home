@@ -38,6 +38,16 @@ resource "oci_core_security_list" "public-security-list" {
     destination_type = "CIDR_BLOCK"
     protocol         = "all"
   }
+  ingress_security_rules {
+    source_type = "CIDR_BLOCK"
+    #Required
+    protocol = "6"
+    source   = var.own_public_ip
+    tcp_options {
+      max = 22
+      min = 22
+    }
+  }
 }
 
 

@@ -20,3 +20,7 @@ variable "region" {
 variable "namespace" {
   type = string
 }
+
+variable "own_public_ip" {
+  type = string
+}
