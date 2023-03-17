@@ -32,7 +32,7 @@ resource "oci_core_instance" "ubuntu_instance" {
     } */
   }
   source_details {
-    source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaay7ekn6q6guxinjyxcno6ufh4ijevt6uhcooyfwsbzd2qd4kunbia"
+    source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaab6zjaf4gdlw6xnqq56l7dta2nliqtdqlno4iaf6oimnkatfnf4sq"
     source_type = "image"
   }
   metadata = {

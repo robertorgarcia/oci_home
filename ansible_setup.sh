@@ -8,3 +8,6 @@ sudo chown -R urbino:urbino /home/urbino/.ssh
 sudo chmod 700 /home/urbino/.ssh
 sudo chmod 600 /home/urbino/.ssh/authorized_keys
 sudo echo 'urbino ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
+sudo cp /home/ubuntu/.bashrc /home/urbino/.bashrc
+sudo cp /home/ubuntu/.profile /home/urbino/.profile
+sudo chsh -s /bin/bash urbino
