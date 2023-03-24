@@ -9,27 +9,16 @@ resource "oci_core_instance" "ubuntu_instance" {
   # Optional
   display_name = "node${count.index}"
   create_vnic_details {
-    subnet_id = oci_core_subnet.vcn-public-subnet.id
+    assign_private_dns_record = true
+    assign_public_ip          = true
+    display_name              = "vnic-node${count.index}"
+    subnet_id                 = oci_core_subnet.vcn-public-subnet.id
+    hostname_label            = "node${count.index}"
+    private_ip                = cidrhost("10.0.0.0/16", 10 + count.index)
   }
   agent_config {
     is_management_disabled = "true"
     is_monitoring_disabled = "true"
-    /* plugins_config {
-      desired_state = "ENABLED"
-      name          = "Management Agent"
-    }
-    plugins_config {
-      desired_state = "ENABLED"
-      name          = "Custom Logs Monitoring"
-    }
-    plugins_config {
-      desired_state = "ENABLED"
-      name          = "Compute Instance Monitoring"
-    }
-    plugins_config {
-      desired_state = "ENABLED"
-      name          = "Bastion"
-    } */
   }
   source_details {
     source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaab6zjaf4gdlw6xnqq56l7dta2nliqtdqlno4iaf6oimnkatfnf4sq"

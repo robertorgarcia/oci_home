@@ -48,6 +48,12 @@ resource "oci_core_security_list" "public-security-list" {
       min = 22
     }
   }
+  ingress_security_rules {
+    source_type = "CIDR_BLOCK"
+    #Required
+    protocol = "all"
+    source   = "10.0.0.0/16"
+  }
 }
 
 
@@ -65,6 +71,7 @@ resource "oci_core_subnet" "vcn-public-subnet" {
   route_table_id    = module.vcn.ig_route_id
   security_list_ids = [oci_core_security_list.public-security-list.id]
   display_name      = "public-subnet"
+  dns_label         = "cloudosos"
 }
 
 resource "oci_core_drg" "test_drg" {

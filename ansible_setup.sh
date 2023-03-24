@@ -11,3 +11,4 @@ sudo echo 'urbino ALL=(ALL) NOPASSWD:ALL' | sudo tee -a /etc/sudoers
 sudo cp /home/ubuntu/.bashrc /home/urbino/.bashrc
 sudo cp /home/ubuntu/.profile /home/urbino/.profile
 sudo chsh -s /bin/bash urbino
+sudo ufw disable; netfilter-persistent flush
